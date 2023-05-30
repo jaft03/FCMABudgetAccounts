@@ -20,10 +20,12 @@ builder.Services.AddDbContext<FcmaBudgetsDbContext>(
 // set up app
 var app = builder.Build();
 
+// Needed to be always generated for cloud Azure deployment
+app.UseSwagger();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
     app.UseSwaggerUI();
 }
 

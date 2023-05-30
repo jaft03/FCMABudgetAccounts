@@ -6,7 +6,7 @@ using FCMABudgetAccounts.Repository;
 namespace FCMABudgetAccounts.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("accounts")]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
