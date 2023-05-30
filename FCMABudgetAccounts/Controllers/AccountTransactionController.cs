@@ -10,21 +10,23 @@ namespace FCMABudgetAccounts.Controllers;
 public class AccountTransactionController : Controller
 {
     private readonly ILogger<AccountTransactionController> _logger;
-    private readonly FcmaBudgetsDbContext _context;
+    private readonly IConnectionStringsRepository _connectionStringsRepository;
 
     public AccountTransactionController(
         ILogger<AccountTransactionController> logger,
-        FcmaBudgetsDbContext context)
+        IConnectionStringsRepository connectionStringsRepository)
     {
         _logger = logger;
-        _context = context;
+        _connectionStringsRepository = connectionStringsRepository;
     }
 
     [HttpGet(Name = "GetTransactions")]
     public IEnumerable<AccountTransactionEntity> Get(Guid accountId)
     {
         // get transactions for account
-        IEnumerable<AccountTransactionEntity> transactions = AccountTransactionRepository.GetTransactions(_context, accountId);
+        IEnumerable<AccountTransactionEntity> transactions = AccountTransactionRepository.GetTransactions(
+            _connectionStringsRepository, 
+            accountId);
 
         // return transactions
         return transactions;

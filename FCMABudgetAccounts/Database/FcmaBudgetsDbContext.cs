@@ -23,8 +23,8 @@ public partial class FcmaBudgetsDbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:FCMA_BudgetsDB");
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //    => optionsBuilder.UseSqlServer("Name=ConnectionStrings:FCMA_BudgetsDB");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

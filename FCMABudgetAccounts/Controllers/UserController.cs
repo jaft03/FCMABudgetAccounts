@@ -10,21 +10,22 @@ namespace FCMABudgetAccounts.Controllers;
 public class UserController : Controller
 {
     private readonly ILogger<AccountController> _logger;
-    private readonly FcmaBudgetsDbContext _context;
+    private readonly IConnectionStringsRepository _connectionStringsRepository;
 
     public UserController(
         ILogger<AccountController> logger,
-        FcmaBudgetsDbContext context)
+        IConnectionStringsRepository connectionStringsRepository)
     {
         _logger = logger;
-        _context = context;
+        _connectionStringsRepository = connectionStringsRepository;
     }
 
     [HttpGet(Name = "GetUsers")]
     public IEnumerable<UserEntity> Get()
     {
         // get users
-        IEnumerable<UserEntity> users = UserRepository.GetUsers(_context);
+        IEnumerable<UserEntity> users = UserRepository.GetUsers(
+            _connectionStringsRepository);
 
         // return users
         return users;

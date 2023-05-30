@@ -15,8 +15,19 @@ public static class UserRepository
     /// <param name="userId"></param>
     /// <returns></returns>
     public static List<UserEntity> GetUsers(
-        FcmaBudgetsDbContext context)
+        IConnectionStringsRepository connectionStringsRepository)
     {
+        // get connection string for database
+        string connectionString = connectionStringsRepository.budgetsDbConnection;
+
+        // set up database options
+        var options = new DbContextOptionsBuilder<FcmaBudgetsDbContext>()
+                   .UseSqlServer(connectionString)
+                   .Options;
+
+        // set up database context
+        FcmaBudgetsDbContext context = new FcmaBudgetsDbContext(options);
+
         // set up result list
         List<UserEntity> accounts = new List<UserEntity>();
 

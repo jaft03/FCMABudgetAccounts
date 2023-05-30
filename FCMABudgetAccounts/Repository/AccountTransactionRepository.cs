@@ -16,9 +16,20 @@ public static class AccountTransactionRepository
     /// <param name="accountId"></param>
     /// <returns></returns>
     public static List<AccountTransactionEntity> GetTransactions(
-        FcmaBudgetsDbContext context,
+        IConnectionStringsRepository connectionStringsRepository,
         Guid accountId)
     {
+        // get connection string for database
+        string connectionString = connectionStringsRepository.budgetsDbConnection;
+
+        // set up database options
+        var options = new DbContextOptionsBuilder<FcmaBudgetsDbContext>()
+                   .UseSqlServer(connectionString)
+                   .Options;
+
+        // set up database context
+        FcmaBudgetsDbContext context = new FcmaBudgetsDbContext(options);
+
         // set up result list
         List<AccountTransactionEntity> accounts = new List<AccountTransactionEntity>();
 
