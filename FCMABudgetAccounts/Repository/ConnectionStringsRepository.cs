@@ -16,7 +16,18 @@ public class ConnectionStringsRepository : IConnectionStringsRepository
     { 
         get
         {
-            return configuration.GetValue<string>("ConnectionStrings:FCMA_BudgetsDB")!;
+            // get connection string
+            string? connectionString = configuration.GetValue<string>("ConnectionStringsFCMABudgetsDB");
+
+            // display trace if not set
+            if(connectionString == null) 
+            {
+                System.Diagnostics.Trace.TraceError("ConnectionStringsFCMABudgetsDB connection string not set.");
+                connectionString = "";
+            }
+            
+            // return result
+            return connectionString!;
         }
     }
 
