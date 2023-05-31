@@ -21,7 +21,7 @@ public class AccountTransactionController : Controller
     }
 
     [HttpGet(Name = "GetTransactions")]
-    public IEnumerable<AccountTransactionEntity> Get(Guid accountId)
+    public JsonResult Get(Guid accountId)
     {
         // get transactions for account
         IEnumerable<AccountTransactionEntity> transactions = AccountTransactionRepository.GetTransactions(
@@ -29,6 +29,6 @@ public class AccountTransactionController : Controller
             accountId);
 
         // return transactions
-        return transactions;
+        return Json(transactions);
     }
 }

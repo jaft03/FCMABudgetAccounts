@@ -21,13 +21,13 @@ public class UserController : Controller
     }
 
     [HttpGet(Name = "GetUsers")]
-    public IEnumerable<UserEntity> Get()
+    public JsonResult Get()
     {
         // get users
         IEnumerable<UserEntity> users = UserRepository.GetUsers(
             _connectionStringsRepository);
 
         // return users
-        return users;
+        return Json(users);
     }
 }

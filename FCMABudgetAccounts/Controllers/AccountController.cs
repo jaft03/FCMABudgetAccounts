@@ -21,7 +21,7 @@ public class AccountController : Controller
     }
 
     [HttpGet(Name = "GetAccounts")]
-    public IEnumerable<AccountEntity> Get(Guid userId)
+    public JsonResult Get(Guid userId)
     {
         // get accounts for user
         IEnumerable<AccountEntity> accounts = AccountRepository.GetAccounts(
@@ -29,6 +29,6 @@ public class AccountController : Controller
             userId);
 
         // return accounts
-        return accounts;
+        return Json(accounts);
     }
 }
