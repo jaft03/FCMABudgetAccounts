@@ -2,6 +2,7 @@
 using FCMABudgetAccounts.ViewModel;
 using FCMABudgetAccounts.Database;
 using FCMABudgetAccounts.Repository;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace FCMABudgetAccounts.Controllers;
 
@@ -23,6 +24,9 @@ public class UserController : Controller
     [HttpGet(Name = "GetUsers")]
     public JsonResult Get()
     {
+        // for debugging
+        System.Diagnostics.Debug.WriteLine("GetUsers");
+
         // get users
         IEnumerable<UserEntity> users = UserRepository.GetUsers(
             _connectionStringsRepository);
